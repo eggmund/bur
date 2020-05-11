@@ -1,7 +1,7 @@
 use chrono::prelude::*;
 
 use super::{*, Module};
-use crate::{config, GenResult};
+use crate::config;
 
 /// Included module with the default build.
 /// Displays the current date and time in the format

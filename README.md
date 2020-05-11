@@ -39,7 +39,6 @@ Then a new file called `hello_world.rs` will need to be made under the `src/modu
 
 ```rust
 use super::{*, Module};
-use crate::GenResult;
 
 pub struct HelloWorld;
 ```
