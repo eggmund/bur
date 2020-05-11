@@ -26,11 +26,11 @@ impl Bur {
 
     pub async fn update(&mut self) -> GenResult<()> {
         let mut has_updated = false;    // true if any field has updated
-        let mut bar_string = String::from("|");
+        let mut bar_string = String::from(config::MODULE_SEPARATOR);
     
         for module in self.modules.iter_mut() {
             let module_needed_update = module.update(self.update_counter).await?;
-            bar_string.push_str(&format!(" {} |", module));
+            bar_string.push_str(&format!(" {} {}", module, config::MODULE_SEPARATOR));
 
             if module_needed_update {
                 has_updated = true;
@@ -66,7 +66,7 @@ async fn main() -> GenResult<()> {
     // Have modules in order going from left -> right along bar
     // Place new modules inside Box
     let mut bur = Bur::new(vec![
-        Box::new( modules::Time::default() ),
+        Box::new( modules::time::Time::default() ),
     ]);
 
     loop {
