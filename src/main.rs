@@ -1,3 +1,6 @@
+#[macro_use] extern crate log;
+extern crate binance as binance_api;
+
 mod config;
 mod modules;
 
@@ -38,8 +41,8 @@ impl Bur {
         }
 
         if has_updated {
-            println!("Bar has updated.");
             self.update_bar_text(&bar_string);
+            info!("Bar has updated: {}", &bar_string);
         }
 
         self.update_counter = self.update_counter.wrapping_add(1);
@@ -61,9 +64,11 @@ impl Bur {
 
 #[tokio::main]
 async fn main() -> GenResult<()> {
+    pretty_env_logger::init();
     // Have modules in order going from left -> right along bar
     // Place new modules inside Box
     let mut bur = Bur::new(vec![
+        Box::new( modules::binance::Binance::default() ),
         Box::new( modules::idena::Idena::default() ),
         Box::new( modules::time::Time::default() ),
     ]);

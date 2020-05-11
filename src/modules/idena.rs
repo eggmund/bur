@@ -1,5 +1,5 @@
 use super::{*, Module};
-use crate::{config, GenResult};
+use crate::config;
 
 use idena_api::IdenaAPI;
 

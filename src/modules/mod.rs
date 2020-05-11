@@ -1,5 +1,6 @@
 pub mod time;
 pub mod idena;
+pub mod binance;
 
 pub use async_trait::async_trait;
 pub use std::fmt;
