@@ -42,10 +42,8 @@ impl Bur {
             self.update_bar_text(&bar_string);
         }
 
-        self.update_counter += 1;
+        self.update_counter = self.update_counter.wrapping_add(1);
         thread::sleep(self.base_update_sleep);    // Sleep
-
-        self.update_counter += 1;
 
         Ok(())
     }
