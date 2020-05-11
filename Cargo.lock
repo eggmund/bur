@@ -389,6 +389,7 @@ dependencies = [
 [[package]]
 name = "idena_api"
 version = "0.1.0"
+source = "git+https://github.com/eggmund/idena_api#bbcb88fd660b957e96cdecd44c276984e79cba8c"
 dependencies = [
  "reqwest",
  "serde_json",
