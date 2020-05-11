@@ -53,7 +53,7 @@ Now implement the `Module` trait for your struct. The `Module` trait is a simple
 // -- snip ---
 #[async_trait]
 impl Module for HelloWorld {
-    fn update(&mut self, _update_counter: usize) -> GenResult<bool> {
+    async fn update(&mut self, _update_counter: usize) -> GenResult<bool> {
         Ok(false)
     }
 }
