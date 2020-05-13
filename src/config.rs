@@ -16,5 +16,5 @@ pub const IDENA_HOST_URL: &str = "http://localhost:9009/";
 pub const IDENA_ADDRESS: &str = "0xd5da967d65bcafa164c996fdf99834c650be1e38";
 
 // --- Binance ---
-pub const BINANCE_SYMBOL_NUM: usize = 2;
-pub const BINANCE_SYMBOLS: [&str; BINANCE_SYMBOL_NUM] = ["ETHUSDT", "BTCUSDT"];
+pub const BINANCE_SYMBOL_NUM: usize = 1;
+pub const BINANCE_SYMBOLS: [&str; BINANCE_SYMBOL_NUM] = ["ETHUSDT"];
