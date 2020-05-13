@@ -31,11 +31,16 @@ impl Bur {
         let mut bar_string = String::from(config::MODULE_SEPARATOR);
     
         for module in self.modules.iter_mut() {
-            let module_needed_update = module.update(self.update_counter).await?;
-            bar_string.push_str(&format!(" {} {}", module, config::MODULE_SEPARATOR));
+            // Module can return error if it doesn't want to display anything
+            match module.update(self.update_counter).await {
+                Ok(module_needed_update) => {
+                    bar_string.push_str(&format!(" {} {}", module, config::MODULE_SEPARATOR));
 
-            if module_needed_update {
-                has_updated = true;
+                    if module_needed_update {
+                        has_updated = true;
+                    }
+                },
+                Err(e) => debug!("Module update returned error: {}", e),
             }
         }
 

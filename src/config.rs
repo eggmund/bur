@@ -1,5 +1,5 @@
 /// The minimum rate at which the bar updates. Default is 2.
-pub const BASE_UPDATE_PERIOD: usize = 2;
+pub const BASE_UPDATE_PERIOD: usize = 60;
 /// The text used to separate modules. Default is "|".
 pub const MODULE_SEPARATOR: &str = "|";
 
