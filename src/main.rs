@@ -1,5 +1,4 @@
 #[macro_use] extern crate log;
-extern crate binance as binance_api;
 
 mod config;
 mod modules;

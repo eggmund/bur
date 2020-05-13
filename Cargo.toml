@@ -8,10 +8,11 @@ edition = "2018"
 
 [dependencies]
 idena_api = { git = "https://github.com/eggmund/idena_api" }
-binance = "0.10.4"
+tokio-binance = "0.4"
+serde_json = "1.0"
 
 chrono = "0.4"
-tokio = { version = "0.2", features = ["macros"] }
+tokio = { version = "0.2", features = ["macros", "time"] }
 async-trait = "0.1"
 log = "0.4"
 pretty_env_logger = "0.4"
