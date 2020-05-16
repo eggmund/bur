@@ -1,6 +1,12 @@
 pub mod time;
+#[cfg(feature = "idena")]
 pub mod idena;
+#[cfg(feature = "binance")]
 pub mod binance;
+#[cfg(feature = "wifi")]
+pub mod wifi;
+#[cfg(feature = "cpu_usage")]
+pub mod cpu_usage;
 
 pub use async_trait::async_trait;
 pub use std::fmt;
