@@ -77,6 +77,8 @@ async fn main() -> GenResult<()> {
         // Box::new( modules::wifi::Wifi ),
         #[cfg(feature = "cpu_usage")]
         Box::new( modules::cpu_usage::CPUUsage::default() ),
+        #[cfg(feature = "mem_usage")]
+        Box::new( modules::mem_usage::MemUsage::default() ),
         #[cfg(feature = "time")]
         Box::new( modules::time::Time::default() ),
     ]);

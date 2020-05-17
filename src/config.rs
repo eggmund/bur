@@ -19,3 +19,6 @@ pub const BINANCE_TIMEOUT: u64 = 5;    // Seconds
 
 // --- CPUUsage ---
 pub const CPU_USAGE_UPDATE_PERIOD: usize = 2/BASE_UPDATE_PERIOD;
+
+// --- MEM Usage ---
+pub const MEM_USAGE_UPDATE_PERIOD: usize = 6/BASE_UPDATE_PERIOD;
