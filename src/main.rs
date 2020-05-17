@@ -74,12 +74,10 @@ async fn main() -> GenResult<()> {
     let mut bur = Bur::new(vec![
         #[cfg(feature = "binance")]
         Box::new( modules::binance::Binance::default() ),
-        #[cfg(feature = "idena")]
-        Box::new( modules::idena::Idena::default() ),
         // Box::new( modules::wifi::Wifi ),
         #[cfg(feature = "cpu_usage")]
         Box::new( modules::cpu_usage::CPUUsage::default() ),
-        
+        #[cfg(feature = "time")]
         Box::new( modules::time::Time::default() ),
     ]);
 

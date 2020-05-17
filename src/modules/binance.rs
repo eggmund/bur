@@ -3,12 +3,12 @@ use crate::config;
 
 use std::collections::BTreeMap;
 use tokio_binance::{MarketDataClient, BINANCE_US_URL};
+use tokio::time::{Duration, timeout};
 
 pub struct Binance {
     market: MarketDataClient,
     current_prices: BTreeMap<String, f64>,   // (symbol: price). Sorted by symbol
 }
-
 
 impl Default for Binance {
     fn default() -> Self {
@@ -27,12 +27,12 @@ impl Module for Binance {
         let needs_update = update_counter % config::BINANCE_UPDATE_PERIOD == 0;
 
         if needs_update {
-            self.market
+            timeout(Duration::from_secs(config::BINANCE_TIMEOUT), self.market
                 .get_price_ticker()
                 .json::<Vec<Value>>()
-                .await?
+            ).await??
                 .into_iter()
-                .filter(|val| config::BINANCE_SYMBOLS.contains(&val["symbol"].as_str().unwrap()))
+                .filter(|val: &Value| config::BINANCE_SYMBOLS.contains(&val["symbol"].as_str().unwrap()))
                 .for_each(|val| {
                     self.current_prices.insert(
                         val["symbol"].as_str().unwrap().to_owned(),
