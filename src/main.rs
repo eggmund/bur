@@ -24,7 +24,7 @@ impl Bur {
         }
     }
 
-    pub async fn update(&mut self) {
+    pub fn update(&mut self) {
         let mut has_updated = false;    // true if any field has updated
         let mut bar_string = String::from(config::MODULE_SEPARATOR);
 
@@ -34,7 +34,7 @@ impl Bur {
     
         for module in self.modules.iter_mut() {
             // Module can return error if it doesn't want to display anything
-            match module.update(&dt).await {
+            match module.update(&dt) {
                 Ok(module_needed_update) => {
                     bar_string.push_str(&format!(" {} {}", module, config::MODULE_SEPARATOR));
 
@@ -71,16 +71,18 @@ impl Bur {
 }
 
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() {
+    #[cfg(features = "debug")]
     pretty_env_logger::init();
+    
     // Have modules in order going from left -> right along bar
     // Place new modules inside Box
     let mut bur = Bur::new(vec![
+        #[cfg(features = "time")]
         Box::new( modules::time::Time::default() ),
     ]);
 
     loop {
-        bur.update().await;
+        bur.update();
     }
 }

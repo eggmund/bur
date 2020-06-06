@@ -1,29 +1,20 @@
+#[cfg(features = "time")]
 pub mod time;
 
-pub use async_trait::async_trait;
 pub use std::fmt;
 pub use std::time::Duration;
 
 /// Module is the trait for defining a new module.
 /// The module has to implement the Display trait so that it can be displayed by the bar.
-#[async_trait]
 pub trait Module: fmt::Display {
     /// Returns `true` if the module has had to update, so that the bar knows to
     /// update the system's text.
-    async fn update(&mut self, dt: &Duration) -> ModuleResult<bool>;
+    fn update(&mut self, dt: &Duration) -> ModuleResult<bool>;
 }
 
 /// Result type for use in module functions.
-pub type ModuleResult<T> = Result<T, ModuleError>;
+pub type ModuleResult<T> = Result<T, Box<dyn std::error::Error>>;
 
-/// Error type containing message of what happened.
-pub struct ModuleError(pub String);
-
-impl fmt::Display for ModuleError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "Error msg: {}", self.0)
-    }
-}
 /// Basic type needed for a module.
 /// Handles when the module should update.
 #[derive(Default)]

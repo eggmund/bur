@@ -6,4 +6,5 @@ pub const MODULE_SEPARATOR: &str = "|";
 
 // --- UPDATE PERIODS ---
 // In milliseconds
+#[cfg(features = "time")]
 pub const TIME_UPDATE_PERIOD: u64 = 1000; // 1000 * 60;     // 1 second * 60

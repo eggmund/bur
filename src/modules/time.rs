@@ -19,9 +19,8 @@ impl Time {
     }
 }
 
-#[async_trait]
 impl Module for Time {
-    async fn update(&mut self, dt: &Duration) -> ModuleResult<bool> {
+    fn update(&mut self, dt: &Duration) -> ModuleResult<bool> {
         let needs_update = self.base_module.needs_update(dt);
         if needs_update {
             self.update_datetime();

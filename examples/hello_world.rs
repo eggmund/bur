@@ -3,9 +3,8 @@ use super::*;
 #[derive(Default)]
 pub struct HelloWorld;
 
-#[async_trait]
 impl Module for HelloWorld {
-    async fn update(&mut self, _dt: &Duration) -> ModuleResult<bool> {
+    fn update(&mut self, _dt: &Duration) -> ModuleResult<bool> {
         // Since nothing needs to be updated since this module simply
         // prints "Hello, world!", just return false.
         Ok(false)
