@@ -30,7 +30,7 @@ impl Bur {
 
         let update_time = Instant::now();
         let dt = update_time.duration_since(self.last_update_time);
-        info!("dt: {:?}", dt);
+        debug!("dt: {:?}", dt);
     
         for module in self.modules.iter_mut() {
             // Module can return error if it doesn't want to display anything
@@ -48,16 +48,13 @@ impl Bur {
 
         if has_updated {
             self.update_bar_text(&bar_string);
-            info!("Bar has updated: {}", &bar_string);
+            debug!("Bar has updated: {}", &bar_string);
         }
 
         self.last_update_time = update_time;
 
-        let update_sleep = if dt > self.update_sleep { self.update_sleep - (dt - self.update_sleep) } else { self.update_sleep };
-        info!("Update sleep: {:?}", update_sleep);
-
         thread::yield_now();
-        thread::sleep(update_sleep);
+        thread::sleep(self.update_sleep);
     }
 
     fn update_bar_text(&self, text: &str) {
@@ -72,13 +69,16 @@ impl Bur {
 
 
 fn main() {
-    #[cfg(features = "debug")]
+    #[cfg(feature = "logger")]
     pretty_env_logger::init();
-    
+
     // Have modules in order going from left -> right along bar
     // Place new modules inside Box
     let mut bur = Bur::new(vec![
-        #[cfg(features = "time")]
+        #[cfg(feature = "network")]
+        Box::new( modules::network::Network::default() ),
+
+        #[cfg(feature = "time")]
         Box::new( modules::time::Time::default() ),
     ]);
 

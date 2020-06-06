@@ -1,5 +1,10 @@
-#[cfg(features = "time")]
+#![allow(dead_code)]
+
+#[cfg(feature = "time")]
 pub mod time;
+
+#[cfg(feature = "network")]
+pub mod network;
 
 pub use std::fmt;
 pub use std::time::Duration;
@@ -19,8 +24,12 @@ pub type ModuleResult<T> = Result<T, Box<dyn std::error::Error>>;
 /// Handles when the module should update.
 #[derive(Default)]
 pub struct BaseModule {
+    /// The current delta time counter.
     dt_counter: Duration,
+    /// Target update period for this module.
     update_period: Duration,
+    /// Has the first update been done?
+    first_update_done: bool,
 }
 
 impl BaseModule {
@@ -32,7 +41,10 @@ impl BaseModule {
     }
 
     pub fn needs_update(&mut self, dt: &Duration) -> bool {
-        if self.update_period > Duration::from_secs(0) {    // If the update period is 0 seconds, then this means the module never updates.
+        if !self.first_update_done {
+            self.first_update_done = true;
+            true
+        } else if self.update_period > Duration::from_secs(0) {    // If the update period is 0 seconds, then this means the module never updates.
             self.dt_counter += *dt;
     
             if self.dt_counter > self.update_period {

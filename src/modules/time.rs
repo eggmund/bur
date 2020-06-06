@@ -24,6 +24,7 @@ impl Module for Time {
         let needs_update = self.base_module.needs_update(dt);
         if needs_update {
             self.update_datetime();
+            info!("New time: {}", self.time_string);
         }
         Ok(needs_update)
     }
