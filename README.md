@@ -4,12 +4,14 @@ Bar text updater that uses `xsetroot` to update the text of your window manager'
 
 NOTE: Only tested on dwm's bar.
 
-As default bur only comes with a `Time` module, however it is intended for you to add more modules easily. See `Adding modules` for more info.
+As default bur only comes with a `Time` and a `Network` module, however it is intended for you to add more modules easily. See `Adding modules` for more info.
 
 The aim of `bur` is to make a bar status updater that is almost infinitely extensible, whilst also being easy to extend. It can be made to be compatible
 with any setup, as the idea is that the source code can be edited to your specific needs.
 
 You should not need extensive Rust knowledge to create good modules, as the aim is to make it simple to create modules.
+
+![Example](example.png)
 
 ## Building:
 

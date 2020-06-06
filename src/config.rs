@@ -17,5 +17,5 @@ pub const NETWORK_CONFIGURING_SYM: &str = "-";
 pub const NETWORK_CONNECTED_SYM: &str = "📶";
 
 // Binance
-pub const BINANCE_UPDATE_PERIOD: u64 = 1000 * 30;
+pub const BINANCE_UPDATE_PERIOD: u64 = 1000 * 60;
 pub const BINANCE_SYMBOLS: [&str; 2] = ["ETHUSDT", "BTCUSDT"];
