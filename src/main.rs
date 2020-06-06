@@ -4,7 +4,7 @@ mod config;
 mod modules;
 
 use std::thread;
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 use modules::Module;
 
@@ -13,26 +13,30 @@ pub type GenResult<T> = Result<T, Box<dyn std::error::Error>>;
 
 struct Bur {
     modules: Vec<Box<dyn Module>>,
-    update_counter: usize,
-    base_update_sleep: Duration,
+    last_update_time: Instant,
+    update_sleep: Duration,
 }
 
 impl Bur {
     pub fn new(modules: Vec<Box<dyn Module>>) -> Self {
         Self {
             modules,
-            update_counter: 0,
-            base_update_sleep: Duration::new(config::BASE_UPDATE_PERIOD as u64, 0),
+            last_update_time: Instant::now(),
+            update_sleep: Duration::from_millis(config::BASE_UPDATE_PERIOD),
         }
     }
 
     pub async fn update(&mut self) -> GenResult<()> {
         let mut has_updated = false;    // true if any field has updated
         let mut bar_string = String::from(config::MODULE_SEPARATOR);
+
+        let update_time = Instant::now();
+        let dt = update_time.duration_since(self.last_update_time);
+        info!("dt: {:?}", dt);
     
         for module in self.modules.iter_mut() {
             // Module can return error if it doesn't want to display anything
-            match module.update(self.update_counter).await {
+            match module.update(&dt).await {
                 Ok(module_needed_update) => {
                     bar_string.push_str(&format!(" {} {}", module, config::MODULE_SEPARATOR));
 
@@ -49,8 +53,11 @@ impl Bur {
             info!("Bar has updated: {}", &bar_string);
         }
 
-        self.update_counter = self.update_counter.wrapping_add(1);
-        thread::sleep(self.base_update_sleep);    // Sleep
+        self.last_update_time = update_time;
+
+        let update_sleep = if dt > self.update_sleep { self.update_sleep - (dt - self.update_sleep) } else { self.update_sleep };
+        info!("Update sleep: {:?}", update_sleep);
+        thread::sleep(update_sleep);    // Sleep
 
         Ok(())
     }

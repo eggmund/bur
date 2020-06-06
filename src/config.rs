@@ -1,9 +1,9 @@
-/// The minimum rate at which the bar updates. Default is 2.
-pub const BASE_UPDATE_PERIOD: usize = 60;
+// The minimum rate at which the bar updates. Default is 60 seconds.
+// In milliseconds
+pub const BASE_UPDATE_PERIOD: u64 = 1000;// 1000 * 60;
 /// The text used to separate modules. Default is "|".
 pub const MODULE_SEPARATOR: &str = "|";
 
 // --- UPDATE PERIODS ---
-// NOTE: These values have to have a non-zero value
-// For an update period of T seconds, you do T/BASE_UPDATE_PERIOD
-pub const TIME_UPDATE_PERIOD: usize = 60/BASE_UPDATE_PERIOD;
+// In milliseconds
+pub const TIME_UPDATE_PERIOD: u64 = 1000; // 1000 * 60;     // 1 second * 60
