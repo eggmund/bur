@@ -56,8 +56,8 @@ impl fmt::Display for Binance {
             out_string.push_str(&format!("{:.2}", price));
 
             match symbol.as_ref() {
-                "ETHUSDT" => out_string.push_str(" $ETH"),
-                "BTCUSDT" => out_string.push_str(" $BTC"),
+                "ETHUSDT" => out_string.push_str(" Ξ"),
+                "BTCUSDT" => out_string.push_str(" ₿"),
                 x => out_string.push_str(x),
             }
 
