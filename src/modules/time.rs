@@ -1,7 +1,7 @@
-use chrono::prelude::*;
-
-use super::{*, Module};
+use super::*;
 use crate::config;
+
+use chrono::prelude::*;
 
 /// Included module with the default build.
 /// Displays the current date and time in the format
@@ -13,18 +13,18 @@ pub struct Time {
 
 impl Time {
     #[inline]
-    fn get_datetime() -> String {
+    fn update_datetime(&mut self) {
         let localtime: DateTime<Local> = Local::now();
-        localtime.format("%A%v %I:%M%P").to_string()
+        self.time_string = localtime.format("%A%v %I:%M%P").to_string();
     }
 }
 
 #[async_trait]
 impl Module for Time {
-    async fn update(&mut self, dt: &Duration) -> GenResult<bool> {
+    async fn update(&mut self, dt: &Duration) -> ModuleResult<bool> {
         let needs_update = self.base_module.needs_update(dt);
         if needs_update {
-            self.time_string = Self::get_datetime();
+            self.update_datetime();
         }
         Ok(needs_update)
     }
@@ -39,6 +39,7 @@ impl fmt::Display for Time {
 impl Default for Time {
     fn default() -> Self {
         Self {
+            // Give the BaseModule the target update period for this module.
             base_module: BaseModule::new(config::TIME_UPDATE_PERIOD),
             time_string: String::new(),
         }

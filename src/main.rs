@@ -8,8 +8,6 @@ use std::time::{Duration, Instant};
 
 use modules::Module;
 
-// Generic type for results that produce generic error.
-pub type GenResult<T> = Result<T, Box<dyn std::error::Error>>;
 
 struct Bur {
     modules: Vec<Box<dyn Module>>,
@@ -26,7 +24,7 @@ impl Bur {
         }
     }
 
-    pub async fn update(&mut self) -> GenResult<()> {
+    pub async fn update(&mut self) {
         let mut has_updated = false;    // true if any field has updated
         let mut bar_string = String::from(config::MODULE_SEPARATOR);
 
@@ -57,9 +55,9 @@ impl Bur {
 
         let update_sleep = if dt > self.update_sleep { self.update_sleep - (dt - self.update_sleep) } else { self.update_sleep };
         info!("Update sleep: {:?}", update_sleep);
-        thread::sleep(update_sleep);    // Sleep
 
-        Ok(())
+        thread::yield_now();
+        thread::sleep(update_sleep);
     }
 
     fn update_bar_text(&self, text: &str) {
@@ -68,21 +66,22 @@ impl Bur {
         Command::new("xsetroot")
             .args(&["-name", text])
             .output()
-            .expect("xsetroot command failed to start.");
+            .expect("xsetroot command failed to start. Please make sure it is installed.");
     }
 }
 
 
 #[tokio::main]
-async fn main() -> GenResult<()> {
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
     pretty_env_logger::init();
     // Have modules in order going from left -> right along bar
     // Place new modules inside Box
     let mut bur = Bur::new(vec![
+        Box::new( modules::hello_world::HelloWorld::default() ),
         Box::new( modules::time::Time::default() ),
     ]);
 
     loop {
-        bur.update().await?;
+        bur.update().await;
     }
 }
