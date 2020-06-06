@@ -2,7 +2,7 @@
 
 // The minimum rate at which the bar updates in milliseconds. Default is 1 second.
 /// WARNING: This should be <= the smallest update period.
-pub const BASE_UPDATE_PERIOD: u64 = 2000;
+pub const BASE_UPDATE_PERIOD: u64 = 1000;
 /// The text used to separate modules. Default is "|".
 pub const MODULE_SEPARATOR: &str = "|";
 
@@ -19,3 +19,6 @@ pub const NETWORK_CONNECTED_SYM: &str = "📶";
 // Binance
 pub const BINANCE_UPDATE_PERIOD: u64 = 1000 * 60;
 pub const BINANCE_SYMBOLS: [&str; 2] = ["ETHUSDT", "BTCUSDT"];
+
+// CPU usage
+pub const CPU_UPDATE_PERIOD: u64 = 1000;

@@ -78,6 +78,9 @@ fn main() {
         #[cfg(feature = "binance_prices")]
         Box::new( modules::binance_prices::BinancePrices::default() ),
 
+        #[cfg(feature = "cpu")]
+        Box::new( modules::cpu::Cpu::default() ),
+
         #[cfg(feature = "network")]
         Box::new( modules::network::Network::default() ),
 
