@@ -18,4 +18,4 @@ pub const NETWORK_CONNECTED_SYM: &str = "📶";
 
 // Binance
 pub const BINANCE_UPDATE_PERIOD: u64 = 1000 * 30;
-pub const BINANCE_SYMBOLS: [&str; 1] = ["ETHUSDT"];
+pub const BINANCE_SYMBOLS: [&str; 2] = ["ETHUSDT", "BTCUSDT"];

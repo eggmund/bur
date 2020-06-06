@@ -20,7 +20,7 @@ impl Module for BinancePrices {
                 self.current_prices.insert(
                     match *symbol {  // A few matches for common symbols
                         "ETHUSDT" => "Ξ".to_owned(),
-                        "BTCUSTD" => "Ƀ".to_owned(),
+                        "BTCUSDT" => "Ƀ".to_owned(),
                         x => x.to_owned(),
                     },
                     self.market.get_price(symbol.to_owned())?.price,
