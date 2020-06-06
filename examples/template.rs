@@ -30,7 +30,7 @@ impl fmt::Display for Template {
     }
 }
 
-impl Default for Network {
+impl Default for Template {
     fn default() -> Self {
         Self {
             // Give the BaseModule the target update period for this module.

@@ -75,6 +75,9 @@ fn main() {
     // Have modules in order going from left -> right along bar
     // Place new modules inside Box
     let mut bur = Bur::new(vec![
+        #[cfg(feature = "binance_prices")]
+        Box::new( modules::binance_prices::BinancePrices::default() ),
+
         #[cfg(feature = "network")]
         Box::new( modules::network::Network::default() ),
 

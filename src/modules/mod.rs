@@ -6,6 +6,9 @@ pub mod time;
 #[cfg(feature = "network")]
 pub mod network;
 
+#[cfg(feature = "binance_prices")]
+pub mod binance_prices;
+
 pub use std::fmt;
 pub use std::time::Duration;
 
