@@ -1,4 +1,8 @@
-// A template to get started making new modules
+/// A template to get started making new modules.
+/// Don't forget to add:
+/// - `pub mod template;` in `mod.rs`.
+/// - `Box::new( modules::template::Template::default() )` to the array in `main.rs::main()`.
+
 
 use super::*;
 use crate::config;
