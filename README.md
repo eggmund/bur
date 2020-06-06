@@ -4,8 +4,8 @@ Bar text updater that uses `xsetroot` to update the text of your window manager'
 
 NOTE: Only tested on dwm's bar.
 
-As default bur only comes with a `Time` and a `Network` module, however it is intended for you to add more modules easily. See the `hello_world.rs` example in
-the `examples` folder for more info.
+As default bur only comes with a `Time` and a `Network` module, however it is intended for you to add more modules easily. See the `template.rs` file in
+the `examples` folder for some boilerplate code to make a new module.
 
 ![Example](example.png)
 
