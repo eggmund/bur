@@ -77,7 +77,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Have modules in order going from left -> right along bar
     // Place new modules inside Box
     let mut bur = Bur::new(vec![
-        Box::new( modules::hello_world::HelloWorld::default() ),
         Box::new( modules::time::Time::default() ),
     ]);
 

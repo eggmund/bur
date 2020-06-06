@@ -1,5 +1,4 @@
 pub mod time;
-pub mod hello_world;
 
 pub use async_trait::async_trait;
 pub use std::fmt;
