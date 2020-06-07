@@ -15,7 +15,6 @@ impl Module for BinancePrices {
     fn update(&mut self, dt: &Duration) -> ModuleResult<bool> {
         let needs_update = self.base_module.needs_update(dt);
         if needs_update {
-            info!("Updating binance prices.");
             for symbol in config::BINANCE_SYMBOLS.iter() {
                 self.current_prices.insert(
                     match *symbol {  // A few matches for common symbols

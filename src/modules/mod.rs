@@ -12,6 +12,9 @@ pub mod binance_prices;
 #[cfg(feature = "cpu")]
 pub mod cpu;
 
+#[cfg(feature = "mem")]
+pub mod mem;
+
 pub use std::fmt;
 pub use std::time::Duration;
 

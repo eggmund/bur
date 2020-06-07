@@ -22,3 +22,6 @@ pub const BINANCE_SYMBOLS: [&str; 2] = ["ETHUSDT", "BTCUSDT"];
 
 // CPU usage
 pub const CPU_UPDATE_PERIOD: u64 = 1000;
+
+// Memory usage
+pub const MEM_UPDATE_PERIOD: u64 = 1000;

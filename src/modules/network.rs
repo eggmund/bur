@@ -30,7 +30,6 @@ impl Module for Network {
     fn update(&mut self, dt: &Duration) -> ModuleResult<bool> {
         let needs_update = self.base_module.needs_update(dt);
         if needs_update {
-            info!("Updating network.");
             self.update_output()?;
         }
         Ok(needs_update)

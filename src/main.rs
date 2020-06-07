@@ -81,6 +81,9 @@ fn main() {
         #[cfg(feature = "cpu")]
         Box::new( modules::cpu::Cpu::default() ),
 
+        #[cfg(feature = "mem")]
+        Box::new( modules::mem::Mem::default() ),
+
         #[cfg(feature = "network")]
         Box::new( modules::network::Network::default() ),
 
