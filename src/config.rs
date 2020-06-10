@@ -18,10 +18,10 @@ pub const NETWORK_CONNECTED_SYM: &str = "📶";
 
 // Binance
 pub const BINANCE_UPDATE_PERIOD: u64 = 1000 * 60;
-pub const BINANCE_SYMBOLS: [&str; 2] = ["ETHUSDT", "BTCUSDT"];
+pub const BINANCE_SYMBOLS: &[&str] = &["ETHUSDT", "BTCUSDT"];
 
 // CPU usage
-pub const CPU_UPDATE_PERIOD: u64 = 1000;
+pub const CPU_UPDATE_PERIOD: u64 = 1000 * 2;
 
 // Memory usage
-pub const MEM_UPDATE_PERIOD: u64 = 1000;
+pub const MEM_UPDATE_PERIOD: u64 = 1000 * 4;
