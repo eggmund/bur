@@ -15,7 +15,7 @@ impl Time {
     #[inline]
     fn update_datetime(&mut self) {
         let localtime: DateTime<Local> = Local::now();
-        self.time_string = localtime.format("%A%v %I:%M%P").to_string();
+        self.time_string = localtime.format("%A %v %I:%M%P").to_string();
     }
 }
 
