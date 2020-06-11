@@ -1,4 +1,4 @@
-#[allow(dead_code)]
+#![allow(dead_code)]
 
 // The minimum rate at which the bar updates in milliseconds. Default is 1 second.
 /// WARNING: This should be <= the smallest update period.

@@ -21,7 +21,7 @@ impl Module for Cpu {
 
 impl fmt::Display for Cpu {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:6.2} %CPU", self.perc)
+        write!(f, "{:6.2} 📊", self.perc)
     }
 }
 

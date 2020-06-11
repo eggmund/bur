@@ -19,7 +19,7 @@ impl Module for Mem {
 
 impl fmt::Display for Mem {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:5.2} %MEM", self.perc)
+        write!(f, "{:5.2} ⚙️", self.perc)
     }
 }
 
