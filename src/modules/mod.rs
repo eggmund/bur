@@ -6,8 +6,8 @@ pub mod time;
 #[cfg(feature = "network")]
 pub mod network;
 
-#[cfg(feature = "binance_prices")]
-pub mod binance_prices;
+#[cfg(feature = "crypto_prices")]
+pub mod crypto_prices;
 
 #[cfg(feature = "cpu")]
 pub mod cpu;

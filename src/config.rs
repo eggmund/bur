@@ -18,7 +18,7 @@ pub const NETWORK_CONNECTED_SYM: &str = "📶";
 
 // Binance
 pub const BINANCE_UPDATE_PERIOD: u64 = 1000 * 60;
-pub const BINANCE_SYMBOLS: &[&str] = &["ETHUSDT", "BTCUSDT"];
+pub const BINANCE_SYMBOLS: &[&str] = &["ETHUSDT", "BTCUSDT", "rsrusdt"];
 
 // CPU usage
 pub const CPU_UPDATE_PERIOD: u64 = 1000 * 2;

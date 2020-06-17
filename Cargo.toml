@@ -13,13 +13,15 @@ pretty_env_logger = { version = "0.4", optional = true }
 network-manager = { version = "0.11", optional = true }
 binance = { version = "0.10", optional = true }
 psutil = { version = "3.1.0", default-features = false, optional = true }
+reqwest = { version = "0.10", features = ["json", "blocking"], optional = true }
+serde_json = { version = "1.0", features = ["raw_value"], optional = true }
 
 [features]
-default = ["time", "network"]
+default = ["time", "network", "crypto_prices"]
 
 logger = ["pretty_env_logger"]
 time = ["chrono"]
 network = ["network-manager"]
-binance_prices = ["binance"]
+crypto_prices = ["binance", "reqwest", "serde_json"]
 cpu = ["psutil/cpu"]
 mem = ["psutil/memory"]
