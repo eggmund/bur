@@ -4,9 +4,7 @@ use crate::config;
 use binance::market::Market;
 use binance::api::*;
 use std::collections::BTreeMap;
-use std::path::Path;
 
-use reqwest::Client;
 
 pub struct CryptoPrices {
     base_module: BaseModule,
@@ -18,18 +16,29 @@ impl Module for CryptoPrices {
     fn update(&mut self, dt: &Duration) -> ModuleResult<bool> {
         let needs_update = self.base_module.needs_update(dt);
         if needs_update {
-            for symbol in config::BINANCE_SYMBOLS.iter() {
+            for symbol in config::CRYPTO_BINANCE_SYMBOLS.iter() {
+                info!("Getting price for: {}", symbol);
                 self.current_prices.insert(
                     match *symbol {  // A few matches for common symbols
-                        "ETHUSDT" => "Ξ".to_owned(),
-                        "BTCUSDT" => "Ƀ".to_owned(),
-                        "rsrusdt" => "#".to_owned(),
-                        x => x.to_owned(),
-                    },
-                    match *symbol {
-                        "rsrusdt" => huobi::get_price("rsrusdt")?,
-                        x => self.market.get_price(x.to_owned())?.price,
-                    },
+                        "ETHUSDT" => "Ξ",
+                        "BTCUSDT" => "Ƀ",
+                        "rsrusdt" => "#",
+                        x => x,
+                    }.to_owned(),
+                    self.market.get_price(symbol.to_owned())?.price,
+                );
+            }
+
+            for symbol in config::CRYPTO_HUOBI_SYMBOLS.iter() {
+                info!("Getting price for: {}", symbol);
+                let symbol = symbol.to_lowercase();
+
+                self.current_prices.insert(
+                    match symbol.as_ref() {
+                        "rsrusdt" => "#",
+                        x => x,
+                    }.to_owned(),
+                    huobi::get_price(&symbol)?,
                 );
             }
         }
@@ -57,7 +66,7 @@ impl Default for CryptoPrices {
     fn default() -> Self {
         Self {
             // Give the BaseModule the target update period for this module.
-            base_module: BaseModule::new(config::BINANCE_UPDATE_PERIOD),
+            base_module: BaseModule::new(config::CRYPTO_UPDATE_PERIOD),
             market: Binance::new(None, None),
             current_prices: BTreeMap::new(),
         }

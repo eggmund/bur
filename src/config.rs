@@ -16,9 +16,10 @@ pub const NETWORK_NO_SIGNAL_SYM: &str = "🚫";
 pub const NETWORK_CONFIGURING_SYM: &str = "-";
 pub const NETWORK_CONNECTED_SYM: &str = "📶";
 
-// Binance
-pub const BINANCE_UPDATE_PERIOD: u64 = 1000 * 60;
-pub const BINANCE_SYMBOLS: &[&str] = &["ETHUSDT", "BTCUSDT", "rsrusdt"];
+// Crypto prices. Supports Binance and Huobi exchanges.
+pub const CRYPTO_UPDATE_PERIOD: u64 = 1000 * 60;
+pub const CRYPTO_BINANCE_SYMBOLS: &[&str] = &["ETHUSDT", "BTCUSDT"];
+pub const CRYPTO_HUOBI_SYMBOLS: &[&str] = &["RSRUSDT"];
 
 // CPU usage
 pub const CPU_UPDATE_PERIOD: u64 = 1000 * 2;
