@@ -18,8 +18,8 @@ pub const NETWORK_CONNECTED_SYM: &str = "📶";
 
 // Crypto prices. Supports Binance and Huobi exchanges.
 pub const CRYPTO_UPDATE_PERIOD: u64 = 1000 * 60;
-pub const CRYPTO_BINANCE_SYMBOLS: &[&str] = &["ETHUSDT", "BTCUSDT"];
-pub const CRYPTO_HUOBI_SYMBOLS: &[&str] = &["RSRUSDT"];
+pub const CRYPTO_TOKENS: &str = "bitcoin,ethereum,reserve-rights-token,akropolis";  // Comma separated list of coins
+pub const CRYPTO_VS_CURRENCY: &str = "usd"; // Desired vs currency
 
 // CPU usage
 pub const CPU_UPDATE_PERIOD: u64 = 1000 * 2;
