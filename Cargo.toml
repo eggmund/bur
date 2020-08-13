@@ -18,6 +18,7 @@ network-manager = { version = "0.11", optional = true }
 psutil = { version = "3.1.0", default-features = false, optional = true }
 reqwest = { version = "0.10", features = ["json", "blocking"], optional = true }
 serde_json = { version = "1.0", features = ["raw_value"], optional = true }
+phf = { version = "0.8.0", features = ["macros"], optional = true }
 
 [features]
 default = ["time", "network"]
@@ -25,6 +26,6 @@ default = ["time", "network"]
 logger = ["pretty_env_logger"]
 time = ["chrono"]
 network = ["network-manager"]
-crypto_prices = ["reqwest", "serde_json"]
+crypto = ["reqwest", "serde_json", "phf"]
 cpu = ["psutil/cpu"]
 mem = ["psutil/memory"]

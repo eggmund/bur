@@ -17,9 +17,22 @@ pub const NETWORK_CONFIGURING_SYM: &str = "-";
 pub const NETWORK_CONNECTED_SYM: &str = "📶";
 
 // Crypto prices. Supports Binance and Huobi exchanges.
-pub const CRYPTO_UPDATE_PERIOD: u64 = 1000 * 60;
-pub const CRYPTO_TOKENS: &str = "bitcoin,ethereum,reserve-rights-token,akropolis";  // Comma separated list of coins
-pub const CRYPTO_VS_CURRENCY: &str = "usd"; // Desired vs currency
+#[cfg(feature = "crypto")]
+pub mod crypto {
+    use phf::{phf_map, phf_set};
+
+    pub const CRYPTO_UPDATE_PERIOD: u64 = 1000 * 60;
+    // Cryptocurrencies with the symbol to display. Bitcoin example: 11518.72 Ƀ
+    pub static CRYPTO_TOKENS: phf::Map<&'static str, &'static str> = phf_map! {
+        "bitcoin" => "Ƀ",
+        "ethereum" => "Ξ",
+        "reserve-rights-token" => "#",
+        "akropolis" => "₳",
+        "bzx-protocol" => "b0x",
+    };
+    pub const CRYPTO_VS_CURRENCY: &str = "usd"; // Desired vs currency
+}
+pub use crypto::*;
 
 // CPU usage
 pub const CPU_UPDATE_PERIOD: u64 = 1000 * 2;

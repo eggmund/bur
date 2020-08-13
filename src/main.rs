@@ -75,8 +75,8 @@ fn main() {
     // Have modules in order going from left -> right along bar
     // Place new modules inside Box
     let mut bur = Bur::new(vec![
-        #[cfg(feature = "crypto_prices")]
-        Box::new( modules::crypto_prices::CryptoPrices::default() ),
+        #[cfg(feature = "crypto")]
+        Box::new( modules::crypto::Crypto::default() ),
 
         #[cfg(feature = "cpu")]
         Box::new( modules::cpu::Cpu::default() ),
