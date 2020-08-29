@@ -28,7 +28,7 @@ pub mod crypto {
         "ethereum" => "Ξ",
         "reserve-rights-token" => "#",
         "akropolis" => "₳",
-        "bzx-protocol" => "b0x",
+        // "bzx-protocol" => "b0x",
     };
     pub const CRYPTO_VS_CURRENCY: &str = "usd"; // Desired vs currency
 }
