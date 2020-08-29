@@ -14,6 +14,16 @@ with any setup, as the idea is that the source code can be edited to your specif
 
 You should not need extensive Rust knowledge to create good modules, as the aim is to make it simple to create modules.
 
+## Features:
+
+- `time`: Clock.
+- `network`: Shows current network status.
+- `cpu`: Shows % CPU usage.
+- `mem`: Shows % memory usage.
+- `bat`: Shows battery % and charging status.
+- `crypto`: Shows prices of crypto currencies through coingecko. Any token on coingecko is supported.
+- `logger`: Enable logging (for debugging).
+
 ## Building:
 
 Build with `cargo` using:
