@@ -19,6 +19,7 @@ psutil = { version = "3.1.0", default-features = false, optional = true }
 reqwest = { version = "0.10", features = ["json", "blocking"], optional = true }
 serde_json = { version = "1.0", features = ["raw_value"], optional = true }
 phf = { version = "0.8.0", features = ["macros"], optional = true }
+battery = { version = "0.7.6", optional = true }
 
 [features]
 default = ["time", "network"]
@@ -29,3 +30,4 @@ network = ["network-manager"]
 crypto = ["reqwest", "serde_json", "phf"]
 cpu = ["psutil/cpu"]
 mem = ["psutil/memory"]
+bat = ["battery"]

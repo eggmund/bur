@@ -32,6 +32,7 @@ pub mod crypto {
     };
     pub const CRYPTO_VS_CURRENCY: &str = "usd"; // Desired vs currency
 }
+#[cfg(feature = "crypto")]
 pub use crypto::*;
 
 // CPU usage
@@ -39,3 +40,8 @@ pub const CPU_UPDATE_PERIOD: u64 = 1000 * 2;
 
 // Memory usage
 pub const MEM_UPDATE_PERIOD: u64 = 1000 * 4;
+
+// Battery percentage
+pub const BAT_UPDATE_PERIOD: u64 = 1000;
+pub const BAT_SYMBOL: &str = "🔋";
+pub const BAT_CHARGING_SYMBOL: &str = "⚡";

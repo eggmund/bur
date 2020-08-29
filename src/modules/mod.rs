@@ -15,6 +15,9 @@ pub mod cpu;
 #[cfg(feature = "mem")]
 pub mod mem;
 
+#[cfg(feature = "bat")]
+pub mod bat;
+
 pub use std::fmt;
 pub use std::time::Duration;
 

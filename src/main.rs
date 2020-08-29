@@ -84,6 +84,10 @@ fn main() {
         #[cfg(feature = "mem")]
         Box::new( modules::mem::Mem::default() ),
 
+        #[cfg(feature = "bat")]
+        Box::new(modules::bat::Bat::new()
+            .expect("Cannot use the `bat` feature, no battery fuseound. If you don't think this should be happening, build with --features=logger to see the logs.")),
+
         #[cfg(feature = "network")]
         Box::new( modules::network::Network::default() ),
 
