@@ -17,11 +17,11 @@ impl Bat {
         let battery = match manager.batteries()?.next() {
             Some(Ok(battery)) => battery,
             Some(Err(e)) => {
-                error!("Unable to access battery information");
+                warn!("Unable to access battery information.");
                 return Err(e);
             }
             None => {
-                error!("Unable to find any batteries");
+                warn!("Unable to find any batteries.");
                 return Err(io::Error::from(io::ErrorKind::NotFound).into());
             }
         };

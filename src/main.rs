@@ -32,7 +32,7 @@ impl Bur {
         let dt = update_time.duration_since(self.last_update_time);
         debug!("dt: {:?}", dt);
     
-        for module in self.modules.iter_mut() {
+        for module in self.modules.iter_mut().rev() {
             // Module can return error if it doesn't want to display anything
             match module.update(&dt) {
                 Ok(module_needed_update) => {
@@ -72,29 +72,36 @@ fn main() {
     #[cfg(feature = "logger")]
     pretty_env_logger::init();
 
-    // Have modules in order going from left -> right along bar
-    // Place new modules inside Box
-    let mut bur = Bur::new(vec![
-        #[cfg(feature = "crypto")]
-        Box::new( modules::crypto::Crypto::default() ),
+    // Have modules in order from right -> left.
+    // Place new modules inside `Box`
+    let mut modules: Vec<Box<dyn Module>> = Vec::new();
 
-        #[cfg(feature = "cpu")]
-        Box::new( modules::cpu::Cpu::default() ),
+    #[cfg(feature = "time")]
+    modules.push(Box::new( modules::time::Time::default() ));
 
-        #[cfg(feature = "mem")]
-        Box::new( modules::mem::Mem::default() ),
+    #[cfg(feature = "network")]
+    modules.push(Box::new( modules::network::Network::default() ));
 
-        #[cfg(feature = "bat")]
-        Box::new(modules::bat::Bat::new()
-            .expect("Cannot use the `bat` feature, no battery fuseound. If you don't think this should be happening, build with --features=logger to see the logs.")),
+    #[cfg(feature = "bat")]
+    {
+        if let Ok(bat_module) = modules::bat::Bat::new() {
+            modules.push(Box::new(bat_module));
+        } else {
+            warn!("Cannot use the `bat` feature, no battery found. If you don't think this should be happening, build with --features=logger to see the logs.")
+        }
+    }
+        
+    #[cfg(feature = "mem")]
+    modules.push(Box::new( modules::mem::Mem::default() ));
 
-        #[cfg(feature = "network")]
-        Box::new( modules::network::Network::default() ),
+    #[cfg(feature = "cpu")]
+    modules.push(Box::new( modules::cpu::Cpu::default() ));
 
-        #[cfg(feature = "time")]
-        Box::new( modules::time::Time::default() ),
-    ]);
+    #[cfg(feature = "crypto")]
+    modules.push(Box::new( modules::crypto::Crypto::default() ));
 
+    let mut bur = Bur::new(modules);
+        
     loop {
         bur.update();
     }

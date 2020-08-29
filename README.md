@@ -34,9 +34,9 @@ cargo build --release
 
 The binary will then be found in `target/release/bur`.
 
-To run in debug mode, run the executable with the environment variable:
+To run in debug mode, build with the feature `logger` and run the executable with the environment variable:
 
-`RUST_LOG=debug ./bur`
+`RUST_LOG=debug`
 
 ## Config:
 
