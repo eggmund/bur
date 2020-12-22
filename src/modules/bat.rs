@@ -53,6 +53,6 @@ impl Module for Bat {
 
 impl fmt::Display for Bat {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:.2}% {}", self.perc, if self.is_charging { config::BAT_CHARGING_SYMBOL } else { config::BAT_SYMBOL })
+        write!(f, "{:.0}% {}", self.perc, if self.is_charging { config::BAT_CHARGING_SYMBOL } else { config::BAT_SYMBOL })
     }
 }
